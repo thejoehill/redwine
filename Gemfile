@@ -15,6 +15,7 @@ gem 'i18n', '~> 1.14.1'
 gem 'rbpdf', '~> 1.21.3'
 gem 'addressable'
 gem 'rubyzip', '~> 2.3.0'
+gem 'pg', '>= 0.18', '< 2.0'
 
 #  Ruby Standard Gems
 gem 'csv', '~> 3.2.6'
@@ -70,7 +71,7 @@ if File.exist?(database_file)
       when 'mysql2'
         gem "mysql2", "~> 0.5.0", :platforms => [:mri, :mingw, :x64_mingw]
       when /postgresql/
-        gem 'pg', '~> 1.5.3', :platforms => [:mri, :mingw, :x64_mingw]
+
       when /sqlite3/
         gem 'sqlite3', '~> 1.6.0', :platforms => [:mri, :mingw, :x64_mingw]
       when /sqlserver/
@@ -88,7 +89,7 @@ else
 end
 
 group :development do
-  gem 'listen', '~> 3.3'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem "yard"
 end
 
@@ -107,6 +108,12 @@ group :test do
   gem 'rubocop-performance', '~> 1.19.0', require: false
   gem 'rubocop-rails', '~> 2.20.2', require: false
 end
+
+# Use pg gem only in production (Heroku)
+group :production do
+  gem 'pg'
+end
+
 
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exist?(local_gemfile)
