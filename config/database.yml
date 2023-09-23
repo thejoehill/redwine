@@ -5,20 +5,15 @@
 production:
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  url: <%= ENV['DATABASE_URL'] %>
-
-production:
-  adapter: mysql2
-  database: redmine
-  host: localhost
-  username: root
-  password: ""
-  # Use "utf8" instead of "utfmb4" for MySQL prior to 5.7.7
-  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: bapwaobnrszkgx  # Update this line with the username from Heroku
+  password: 31a5b5cf56eb4f3ba51521978ec0829c075d653bf0ad67e107c40b955bf7716b  # Update with the password from Heroku
+  host: ec2-34-236-103-63.compute-1.amazonaws.com  # Update with the host from Heroku
+  database: dcm1dje5a0ntbf  # Update with the database name from Heroku
+  port: 5432  # Update with the port from Heroku
 
 development:
-  adapter: mysql2
+  adapter: postgresql
   database: redmine_development
   host: localhost
   username: root
@@ -31,7 +26,7 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql2
+  adapter: postgresql
   database: redmine_test
   host: localhost
   username: root
