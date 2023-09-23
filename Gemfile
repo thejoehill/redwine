@@ -109,12 +109,6 @@ group :test do
   gem 'rubocop-rails', '~> 2.20.2', require: false
 end
 
-# Use pg gem only in production (Heroku)
-group :production do
-  gem 'pg'
-end
-
-
 local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
 if File.exist?(local_gemfile)
   eval_gemfile local_gemfile
